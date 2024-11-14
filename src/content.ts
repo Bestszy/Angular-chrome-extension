@@ -1,14 +1,16 @@
 const init=function(){
     const body = document.body;
     const injectElement = document.createElement("div");
-    injectElement.className = "rustyZone-element";
-    injectElement.innerHTML="Hello from the Rusty Zone Element",
-
+    injectElement.className = "can";
+    injectElement.innerHTML="j200: 156cm",
+   
     
+    injectElement.style.backgroundColor = 'pink'
     injectElement.style.position = 'fixed';
     injectElement.style.top = '0';
-    injectElement.style.left = '0';
-    injectElement.style.width = '100%';
+    injectElement.style.width = '400px';
+    injectElement.style.left = '250px';
+    //injectElement.style.width = '100%';
     injectElement.style.zIndex = '10000'; // Ensures it stays above other content
     body.insertBefore(injectElement, body.firstChild);
 }
@@ -29,7 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             // Add the row data to the main data array
             tableData.push(rowData);
           }
-        console.log(tableData)
+        console.log(tableData.flat())
         console.log("Message received in Content Script:", request.greeting, typeof table);
         sendResponse({ response: "Hello from Content Script" });
     }
