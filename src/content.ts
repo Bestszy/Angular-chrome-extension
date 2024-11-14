@@ -9,13 +9,28 @@ const init=function(){
     injectElement.style.top = '0';
     injectElement.style.left = '0';
     injectElement.style.width = '100%';
-    injectElement.style.zIndex = '1000'; // Ensures it stays above other content
+    injectElement.style.zIndex = '10000'; // Ensures it stays above other content
     body.insertBefore(injectElement, body.firstChild);
 }
 init()
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.greeting === "Hello from Popup") {
-        console.log("Message received in Content Script:", request.greeting);
+        const table:any = document.querySelector("table");
+        let tableData = [];
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            let rowData = [];
+          
+            // Loop through each cell in the row
+            for (let j = 0; j < row.cells.length; j++) {
+              rowData.push(row.cells[j].innerText);  // Get the text content of the cell
+            }
+          
+            // Add the row data to the main data array
+            tableData.push(rowData);
+          }
+        console.log(tableData)
+        console.log("Message received in Content Script:", request.greeting, typeof table);
         sendResponse({ response: "Hello from Content Script" });
     }
 });

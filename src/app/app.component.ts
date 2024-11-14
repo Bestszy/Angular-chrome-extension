@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+//import { RouterOutlet } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ColorPickerModule],
+  imports: [ColorPickerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,11 +19,11 @@ export class AppComponent implements OnInit {
     })
   }
   public sender(){
-    console.log("aaa")
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id!, { greeting: "Hello from Popup" }, (response) => {
-          console.log(response);
-        });
+      const activeTab=tabs[0].id!
+      chrome.tabs.sendMessage(activeTab, { greeting: "Hello from Popup" }, (response) => {
+           console.log(response);
+       });
     });
   }
 
