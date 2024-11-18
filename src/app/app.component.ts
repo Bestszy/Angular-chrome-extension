@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 //import { RouterOutlet } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { fabrics } from '../fabrics';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
     })
   }
   public sender(){
-    console.log("works")
+    console.log(fabrics)
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab=tabs[0].id!
       chrome.tabs.sendMessage(activeTab, { greeting: "Hello from Popup" }, (response) => {
