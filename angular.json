@@ -28,6 +28,7 @@
                 "glob": "**/*",
                 "input": "public"
               },
+              "src/contentscript.html",
               "src/manifest.json"
             ],
             "styles": [
