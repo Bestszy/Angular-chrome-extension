@@ -1,4 +1,16 @@
 import { fabrics } from "./fabrics";
+function injectSnippet() {
+  fetch(chrome.runtime.getURL('contentscript.html')) // Adjust path as needed
+      .then(response => response.text())
+      .then(data => {
+          const container = document.createElement('div');
+          container.innerHTML = data;
+          document.body.appendChild(container); // Append the snippet to the body or desired location
+      })
+      .catch(error => console.error('Error loading snippet:', error));
+}
+
+
 
 const init=function(){
     const body = document.body;
@@ -14,12 +26,11 @@ const init=function(){
     injectElement.style.zIndex = '10000'; // Ensures it stays above other content
     body.insertBefore(injectElement, body.firstChild);
 }
-init()
 let obj: object
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.greeting === "Hello from Popup") {
       const table = document.querySelector("Table") as HTMLTableElement;
-
+      injectSnippet();
       // Initialize an empty object to store the result
       const result: Record<string, string> = {};
       if (table) {
@@ -46,6 +57,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.log(obj)
         console.log(fabrics)
         console.log("end")
+        init()
         // loggg()
         // Object.keys(result).forEach(key: any => {
         //   if (key in fabrics) {
@@ -60,18 +72,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({ response: "Hello from Content Script" });
     }
 });
-
-// function loggg(){
-//   Object.keys(obj).forEach(key => {
-//       if (key in fabrics) {
-//         console.log(`Key: ${key}, Value in object2: ${fabrics[key]}`);
-//       } else {
-//         console.log(`Key: ${key} is not present in object2`);
-//       }
-//     });
-
-// console.log("start")
-// console.log(obj)
-// console.log(fabrics)
-// console.log("end")
-// }

@@ -22,5 +22,11 @@
   ],
     "action": {
       "default_popup": "index.html"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["contentscript.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
