@@ -1,17 +1,30 @@
-/* snippet.css */
+
 .injected-snippet {
-    background-color: #000a91;
-    border: 1px solid #ccc;
-    padding: 15px;
+    width: 40%;
+    left: 30%;
+    right: 30%;
+    z-index: 10000;
+    top:15px;
+    background-color: rgb(218, 218, 218);
+    border: 5px solid #c7c7c7;
+    border-radius: 50px;
+    padding: 10px;
     font-family: Arial, sans-serif;
+    position: fixed;
 }
 
 .injected-snippet h1 {
-    color: #238b00;
+    width: 50px;
+    margin: auto;
+    color: #303030;
     font-size: 24px;
 }
 
-.injected-snippet p {
-    color: pink;
+.injected-snippet button {
+    display: block;
+    width:50px;
+    margin: auto;
+    color: rgb(140, 0, 255);
     font-size: 16px;
 }
+    

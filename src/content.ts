@@ -4,6 +4,7 @@ function injectSnippet() {
       .then(response => response.text())
       .then(data => {
           const container = document.createElement('div');
+          //container.className="con"
           container.innerHTML = data;
           document.body.appendChild(container); // Append the snippet to the body or desired location
           injectCSS(); // Inject CSS after adding the snippet
@@ -14,26 +15,10 @@ function injectCSS() {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = chrome.runtime.getURL('assets/snippet.css'); // Adjust path as needed
+  link.href = chrome.runtime.getURL('contentscript.css'); // Adjust path as needed
   document.head.appendChild(link); // Add the CSS to the page
 }
 
-
-
-const init=function(){
-    const body = document.body;
-    const injectElement = document.createElement("div");
-    injectElement.className = "can";
-    injectElement.innerHTML="j200: 156cm",
-    injectElement.style.backgroundColor = 'gray'
-    injectElement.style.position = 'fixed';
-    injectElement.style.top = '0';
-    injectElement.style.width = '400px';
-    injectElement.style.left = '250px';
-    //injectElement.style.width = '100%';
-    injectElement.style.zIndex = '10000'; // Ensures it stays above other content
-    body.insertBefore(injectElement, body.firstChild);
-}
 let obj: object
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.greeting === "Hello from Popup") {
@@ -65,7 +50,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.log(obj)
         console.log(fabrics)
         console.log("end")
-        init()
         // loggg()
         // Object.keys(result).forEach(key: any => {
         //   if (key in fabrics) {
