@@ -6,8 +6,16 @@ function injectSnippet() {
           const container = document.createElement('div');
           container.innerHTML = data;
           document.body.appendChild(container); // Append the snippet to the body or desired location
+          injectCSS(); // Inject CSS after adding the snippet
       })
       .catch(error => console.error('Error loading snippet:', error));
+}
+function injectCSS() {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = chrome.runtime.getURL('assets/snippet.css'); // Adjust path as needed
+  document.head.appendChild(link); // Add the CSS to the page
 }
 
 

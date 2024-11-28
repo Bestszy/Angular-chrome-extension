@@ -29,7 +29,8 @@
                 "input": "public"
               },
               "src/contentscript.html",
-              "src/manifest.json"
+              "src/manifest.json",
+              "src/contentscript.css"
             ],
             "styles": [
               "src/styles.css"
