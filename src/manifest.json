@@ -7,15 +7,20 @@
       "activeTab",
       "webNavigation",
       "storage",
-      "scripting"
+      "scripting",
+      "tabs"
+  ],
+  "host_permissions": [
+    "https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/*"
   ],
     "background": {
+    "matches": "https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/*",
     "service_worker": "background.js",
     "type": "module"
   },
   "content_scripts":[
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }

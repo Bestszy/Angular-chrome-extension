@@ -1,13 +1,13 @@
 import { fabrics } from "./fabrics";
 function injectSnippet() {
-  fetch(chrome.runtime.getURL('contentscript.html')) // Adjust path as needed
+  fetch(chrome.runtime.getURL('contentscript.html'))
       .then(response => response.text())
       .then(data => {
           const container = document.createElement('div');
           //container.className="con"
           container.innerHTML = data;
           document.body.appendChild(container); // Append the snippet to the body or desired location
-          injectCSS(); // Inject CSS after adding the snippet
+          //injectCSS(); // Inject CSS after adding the snippet
       })
       .catch(error => console.error('Error loading snippet:', error));
 }
@@ -15,7 +15,7 @@ function injectCSS() {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = chrome.runtime.getURL('contentscript.css'); // Adjust path as needed
+  link.href = chrome.runtime.getURL('contentscript.css');
   document.head.appendChild(link); // Add the CSS to the page
 }
 
@@ -64,3 +64,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({ response: "Hello from Content Script" });
     }
 });
+
+function atStart (){
+  injectSnippet();
+  injectCSS()
+}
+atStart()
