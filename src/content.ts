@@ -1,4 +1,16 @@
 import { fabrics } from "./fabrics";
+
+const url =window.location.hostname
+console.log(url)
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "deactivate") {
+    console.log("Cleaning up content script...");
+    // Perform cleanup (e.g., remove injected DOM elements or stop observers)
+    // Optionally, disconnect MutationObserver or other persistent listeners
+  }
+});
+
 function injectSnippet() {
   fetch(chrome.runtime.getURL('contentscript.html'))
       .then(response => response.text())
@@ -69,4 +81,4 @@ function atStart (){
   injectSnippet();
   injectCSS()
 }
-atStart()
+ atStart()
