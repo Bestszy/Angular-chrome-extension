@@ -2,6 +2,10 @@ import { fabrics } from "./fabrics";
 
 const url =window.location.hostname
 console.log(url)
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(message); // { greeting: "hello" }
+  sendResponse({ reply: "hi from content script!" });
+});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "deactivate") {

@@ -9,11 +9,18 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 }, { url: [{ urlContains: "https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/*" }] });
 
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-  console.log(details)
-  if (details.url.includes("https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/" )) {
-    console.log(details.url.includes("https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/"))
+  const tab:any = details.tabId;
+  if(details.url.includes("https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/")===false){
+    chrome.tabs.query({ active: true, currentWindow: true }, () => {
+      chrome.tabs.sendMessage(tab, { greeting: "helloo" }, (response) => {
+        console.log(response);
+      });
+    });
+    
+    console.log(details)
+
   }
-}, { url: [{ urlMatches: ".*" }] });
+}, { url: [{ urlMatches: "https://dashboard.ctnbee.com/" }] });
   // chrome.webNavigation.onCompleted.addListener((details) => {
   //   if (details.url.includes("https://dashboard.ctnbee.com/orders/order-items-to-be-prepared/*")) {
   //     chrome.scripting.executeScript({
